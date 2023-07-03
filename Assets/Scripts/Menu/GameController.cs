@@ -42,7 +42,6 @@ public class GameController : MonoBehaviour
         {
             PLAYERNAME = inputText.text;
             SceneManager.LoadScene("main");
-            SaveFile();
         }
     }
 
