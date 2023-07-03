@@ -80,7 +80,7 @@ public class GameController : MonoBehaviour
             string json = File.ReadAllText(path);
             SaveSytem data = JsonUtility.FromJson<SaveSytem>(json);
 
-            PLAYERNAME = data.name;
+            PLAYERNAMEHIGH = data.name;
             HIGHESTSCORE = data.highScore;
         }
     }
