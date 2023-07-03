@@ -1,9 +1,5 @@
-#if UNITY_EDITOR
 using System.IO;
 using TMPro;
-using UnityEditor;
-#endif
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,11 +10,6 @@ public class GameController : MonoBehaviour
     public static string PLAYERNAMEHIGH = "";
     public static string FILEPATH = "/savefile.sav";
     public static int HIGHESTSCORE = 0;
-
-    [Header("For Menu Only")]
-    [SerializeField] TMP_InputField inputField;
-    [SerializeField] TMP_Text inputText;
-    [SerializeField] GameObject warningText;
 
     private void Awake()
     {
@@ -32,28 +23,6 @@ public class GameController : MonoBehaviour
         DontDestroyOnLoad(Instance);
         LoadFile();
     }
-
-    public void GameStart()
-    {
-        if(inputField.text.Length == 0)
-        {
-            warningText.SetActive(true);
-        }
-        else
-        {
-            PLAYERNAME = inputText.text;
-            SceneManager.LoadScene("main");
-        }
-    }
-
-    public void GameExit()
-    {
-        Application.Quit();
-#if UNITY_EDITOR
-        EditorApplication.ExitPlaymode();
-#endif
-    }
-
 
     [System.Serializable]
     class SaveSytem
