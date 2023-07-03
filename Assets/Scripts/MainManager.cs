@@ -21,7 +21,8 @@ public class MainManager : MonoBehaviour
 
     private void Awake()
     {
-        HighScoreText.text = $"Best Score : {GameController.PLAYERNAME} : {GameController.HIGHESTSCORE}";
+
+        HighScoreText.text = $"Best Score : {GameController.PLAYERNAMEHIGH} : {GameController.HIGHESTSCORE}";
     }
 
     // Start is called before the first frame update
@@ -85,9 +86,10 @@ public class MainManager : MonoBehaviour
         if (m_Points >= GameController.HIGHESTSCORE)
         {
             GameController.HIGHESTSCORE = m_Points;
+            GameController.PLAYERNAMEHIGH = GameController.PLAYERNAME;
             GameController.Instance.SaveFile();
         }
 
-        HighScoreText.text = $"Best Score : {GameController.PLAYERNAME} : {GameController.HIGHESTSCORE}";
+        HighScoreText.text = $"Best Score : {GameController.PLAYERNAMEHIGH} : {GameController.HIGHESTSCORE}";
     }
 }

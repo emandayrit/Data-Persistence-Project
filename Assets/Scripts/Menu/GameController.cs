@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
 {
     public static GameController Instance;
     public static string PLAYERNAME = "";
+    public static string PLAYERNAMEHIGH = "";
     public static string FILEPATH = "/savefile.sav";
     public static int HIGHESTSCORE = 0;
 
@@ -64,7 +65,7 @@ public class GameController : MonoBehaviour
     public void SaveFile()
     {
         SaveSytem data = new SaveSytem();
-        data.name = PLAYERNAME;
+        data.name = PLAYERNAMEHIGH;
         data.highScore = HIGHESTSCORE;
 
         string json = JsonUtility.ToJson(data);
