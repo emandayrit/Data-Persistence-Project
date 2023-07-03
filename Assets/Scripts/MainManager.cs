@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,13 +11,19 @@ public class MainManager : MonoBehaviour
 
     public Text ScoreText;
     public GameObject GameOverText;
-    
+    public Text HighScoreText;
+
+
     private bool m_Started = false;
     private int m_Points;
     
     private bool m_GameOver = false;
 
-    
+    private void Awake()
+    {
+        HighScoreText.text = $"Best Score : {GameController.PLAYERNAME} : {GameController.HIGHESTSCORE}";
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,9 +60,10 @@ public class MainManager : MonoBehaviour
         }
         else if (m_GameOver)
         {
+            NewHighScore();
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
             }
         }
     }
@@ -72,5 +78,16 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+    }
+
+    void NewHighScore()
+    {
+        if (m_Points >= GameController.HIGHESTSCORE)
+        {
+            GameController.HIGHESTSCORE = m_Points;
+            GameController.Instance.SaveFile();
+        }
+
+        HighScoreText.text = $"Best Score : {GameController.PLAYERNAME} : {GameController.HIGHESTSCORE}";
     }
 }
